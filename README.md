@@ -330,3 +330,29 @@ export default () => (
 
 What'll happen when you navigate to this page?
 http://localhost:3000/post?title=Hello%20Next.js
+
+**Special prop "url"**
+
+As you can see, that code will throw an error like this:
+
+![](https://cloud.githubusercontent.com/assets/50838/24542720/5fd985a0-161a-11e7-8971-bc677906b1bf.png)
+
+That's because, `url` prop is only exposed to the page's main component. That's not exposed for other components used in the page. But, if you need, you can pass it like this:
+
+```js
+export default (props) => (
+    <Layout>
+       <Content url={props.url} />
+    </Layout>
+)
+```
+
+**Finally**
+
+Now we've learned how to create dynamic pages using query strings. This is just the start.
+
+A dynamic page might need more information to render, and we may not be able to pass all of them via query strings. Or we may want to have clear URLs like this: http://localhost:3000/blog/hello-nextjs
+
+We can learn all about these things in upcoming lessons. This is the base for all of them.
+
+---
