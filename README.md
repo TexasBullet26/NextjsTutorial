@@ -27,13 +27,18 @@ That's what [Next.js](https://github.com/zeit/next.js) does, but instead of PHP,
   8. Styling Components
   9. Deploying a Next.js App
 
+**Excel**
+  1. Export into a static HTML App.
+  2. Lazy Loading Modules.
+  3. Lazy Loading Components.
+
 ### 1. Getting Started
 
-
+---
 
 ### 2. Navigate Between Pages
 
-
+---
 
 ### 3. Using Shared Components
 
@@ -153,3 +158,51 @@ export default () => (
 Let's say you remove `{props.children}` from the Layout, what happens to the app?
 
 The content of the pages being displayed will be removed.
+
+**Rendering Child Components**
+
+If you remove {props.children}, the Layout cannot render the content we put inside the `Layout` element, as shown below:
+
+```js
+export default () => (
+  <Layout>
+    <p>This is the about page</p>
+  </Layout>
+)
+```
+
+This is just one way to create a Layout component. Here are some other methods of creating a Layout component:
+
+```js
+import WithLayout from '../lib/layout'
+
+const Page = () => (
+  <p>This is the about page</p>
+)
+
+export default withLayout(Page)
+```
+
+```js
+const Page = () => (
+  <p>This is the about page</p>
+)
+
+export default () => (<Layout page={Page}/>)
+```
+
+```js
+const content = (<p>This is the about page</p>)
+
+export default () => (<Layout content={content}/>)
+```
+
+**Using Components**
+
+We've mentioned two use cases for shared components:
+  1. As common header components.
+  2. As Layouts.
+
+You can us components for styling, page layouts, and any other tasks you like. Additionally, you can import components from NPM modules and use them.
+
+---
