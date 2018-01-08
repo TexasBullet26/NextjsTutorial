@@ -2,10 +2,9 @@
   "name": "hello-next",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next"
   },
   "keywords": [],
   "author": "Glenn Lanzer <lanzertrey@gmail.com>",
