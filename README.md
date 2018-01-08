@@ -206,3 +206,73 @@ We've mentioned two use cases for shared components:
 You can us components for styling, page layouts, and any other tasks you like. Additionally, you can import components from NPM modules and use them.
 
 ---
+
+### 4. Create Dynamic Pages
+
+**Introduction**
+
+Now we know how to create a basic Next.js app with multiple pages. In order to create a page, we have to create an actual file on the disk.
+
+However, in a real app, we need to create pages dynamically in order to display dynamic content. There are many approaches to do that with Next.js.
+
+We are starting with creating dynamic pages by using **query strings**.
+
+We'll be creating a simple blog app. It has a list of all the posts on the home (index) page.
+
+![](https://cloud.githubusercontent.com/assets/50838/24542722/600b9ce8-161a-11e7-9f1d-7ed08ff394fd.png)
+
+When you click on a post title, you'll be able to see the individual post on its own view.
+
+![](https://cloud.githubusercontent.com/assets/50838/24542721/5fdd9c26-161a-11e7-9b10-296d4cb6912d.png)
+
+Let's build that app.
+
+**Adding a list of posts**
+
+First of all, let's add the list of post titles in the home page. Add the following content to the `pages/index.js`:
+
+```js
+import Layout from '../components/MyLayout.js'
+import Link from 'next/link'
+
+const PostLink = (props) => (
+  <li>
+    <Link href={`/post?title=${props.title}`}>
+      <a>{props.title}</a>
+    </Link>
+  </li>
+)
+
+export default () => (
+  <Layout>
+    <h1>My Blog</h1>
+    <ul>
+      <PostLink title="Hello Next.js"/>
+      <PostLink title="Learn Next.js is awesome"/>
+      <PostLink title="Deploy apps with Zeit"/>
+    </ul>
+  </Layout>
+)
+```
+
+Once you add this content, you will see a page like this:
+
+![](https://cloud.githubusercontent.com/assets/50838/24542722/600b9ce8-161a-11e7-9f1d-7ed08ff394fd.png)
+
+Click the first link. You'll get a 404 page. That's fine. What's the URL of that page?
+
+`/post?title=Hello%20Next.js`
+
+**Passing Data via Query Strings**
+
+We are passing data via a query string parameter (a query param). In our case, it's the "title" query param. We do this with our `PostLink` component as shown below:
+
+```js
+const PostLink = (props) => (
+  <li>
+    <Link href={`/post?title=${props.title}`}>
+      <a>{props.title}</a>
+    </Link>
+  </li>
+)
+```
