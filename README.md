@@ -86,3 +86,70 @@ export default () => (
 You can do the same for the about.js page as well.
 
 At this point, if you navigate to your app at http://localhost:3000, you'll be able to see the new Header and navigate between pages.
+
+Change the `components` directory to `comp` and change the appropriate routes. Will this work the same as the directory being called `components`? Yes.
+
+**The Component Directory**
+
+Yes. It will work as expected.
+
+We don't need to put our components in a special directory; the directory can be named anything. *The only special directory is the `pages` directory.*
+
+You can even create the Component inside the `pages` directory.
+
+Here we didn't do that because we don't need a direct URL to our Header component.
+
+**The Layout Component**
+
+In our a;;, we'll use a common style across various pages. For this purpose, we can create a common Layout component and use it for each of our pages. Here's an example:
+
+Add this content to `components/MyLayout.js`:
+
+```js
+import Header from './Header'
+
+const layoutStyle = {
+  margin: 20,
+  padding: 20,
+  border: '1px solid #DDD'
+}
+
+const Layout = (props) => (
+  <div style={layoutStyle}>
+    <Header />
+    {props.children}
+  </div>
+)
+
+export default Layout
+```
+
+Once we've done that we can use this Layout in our pages as follows:
+
+```js
+// pages/index.js
+
+import Layout from '../components/MyLayout.js'
+
+export default () => (
+    <Layout>
+       <p>Hello Next.js</p>
+    </Layout>
+)
+```
+
+```js
+// pages/about.js
+
+import Layout from '../components/MyLayout.js'
+
+export default () => (
+    <Layout>
+       <p>This is the about page</p>
+    </Layout>
+)
+```
+
+Let's say you remove `{props.children}` from the Layout, what happens to the app?
+
+The content of the pages being displayed will be removed.
